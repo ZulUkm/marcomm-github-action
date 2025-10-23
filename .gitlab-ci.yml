@@ -33,7 +33,7 @@ deploy_production:
         set ftp:ssl-allow no;
         set net:timeout 10;
         set net:max-retries 3;
-        open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST;
+        open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST $FTP_PORT;  
         lcd .;
         cd $FTP_REMOTE_PATH;
         mirror -Rev 
