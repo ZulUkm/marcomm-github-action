@@ -26,7 +26,7 @@
                                 <img src="{{ URL::asset('build/img/logo-white.svg') }}" alt="Img">
                             </a>
                             <div class="login-userheading">
-                                <h3>Sign In</h3>
+                                <h3>Sign 12345</h3>
                                 <h4>Access the Dreamspos panel using your email and passcode.</h4>
                             </div>
                             <div class="mb-3">
