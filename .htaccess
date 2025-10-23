@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+    Options -MultiViews -Indexes
+    RewriteEngine On
+
+    # If app is under a subdir like /marcomm, set the base (uncomment next line)
+    # RewriteBase /marcomm/
+
+    # Serve existing files/directories directly
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Security: block framework directories from web access
+    RewriteRule ^(vendor|storage|bootstrap|config|resources|routes|tests)/ - [R=404,L]
+
+    # Block sensitive files
+    <FilesMatch "^(artisan|composer\.(json|lock)|package\.json|vite\.config\.js|phpunit\.xml|\.env|\.env\..*|server\.php)$">
+        Require all denied
+    </FilesMatch>
+
+    # Forward everything else to the front controller
+    RewriteRule ^ index.php [L]
+</IfModule>

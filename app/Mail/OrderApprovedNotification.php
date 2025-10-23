@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
+
+class OrderApprovedNotification extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public $order;
+    public $comments;
+
+    /**
+     * Create a new message instance.
+     */
+    public function __construct($order, $comments = null)
+    {
+        $this->order = $order;
+        $this->comments = $comments;
+    }
+
+    /**
+     * Get the message envelope.
+     */
+    public function envelope(): Envelope
+    {
+       return new Envelope(
+            subject: 'Order #' . $this->order->order_number . ' Approved',
+        );
+    }
+
+     /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            view: 'emails.orders.approved',
+        );
+    }
+
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
+    public function attachments(): array
+    {
+        return [];
+    }
+}

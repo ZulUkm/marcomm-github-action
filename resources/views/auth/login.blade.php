@@ -1,0 +1,104 @@
+<?php $page = 'signin'; ?>
+@extends('layout.authlayout')
+@section('content')
+    <div class="account-content">
+        <div class="row login-wrapper m-0">
+            <div class="col-lg-6 p-0">
+                <div class="login-content">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @csrf
+                        <div class="login-userset">
+                            <div class="login-logo logo-normal">
+                                <img src="{{ URL::asset('build/img/logo.svg') }}" alt="img">
+                                <img src="{{ URL::asset('build/img/MARCOMMs_LOGO_50.png') }}" alt="img">
+                            </div>
+                            <a href="{{ url('index') }}" class="login-logo logo-white">
+                                <img src="{{ URL::asset('build/img/logo-white.svg') }}" alt="Img">
+                            </a>
+                            <div class="login-userheading">
+                                <h3>Sign In</h3>
+                                <h4>Access the Dreamspos panel using your email and passcode.</h4>
+                            </div>
+                            <div class="mb-3">
+                                <x-form.text-input label="Ukmper" name="ukmper" type="text" :value="old('ukmper')" autofocus
+                                    autocomplete="ukmper" placeholder="Ukmper" />
+                            </div>
+                            <div class="mb-3">
+                                <x-form.text-input label="Password" name="password" type="password"
+                                    placeholder="********" />
+                            </div>
+                            {{-- <div class="form-login authentication-check">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="custom-control custom-checkbox">
+                                            <label class="checkboxs ps-4 mb-0 pb-0 line-height-1">
+                                                <input type="checkbox">
+                                                <span class="checkmarks"></span>Remember me
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <a class="forgot-link" href="{{ url('forgot-password-2') }}">Forgot Password?</a>
+                                    </div>
+                                </div>
+                            </div> --}}
+                            <div class="form-login">
+                                <button type="submit" class="btn btn-login">Sign In</button>
+                            </div>
+                            {{-- <div class="signinform">
+                                <h4>New on our platform?<a href="{{ url('register-2') }}" class="hover-a"> Create an
+                                        account</a></h4>
+                            </div> --}}
+                            {{-- <div class="form-setlogin or-text">
+                                <h4>OR</h4>
+                            </div> --}}
+                            {{-- <div class="form-sociallink">
+                                <div class="d-flex align-items-center justify-content-center flex-wrap">
+                                    <div class="text-center me-2 flex-fill">
+                                        <a href="javascript:void(0);"
+                                            class="br-10 p-2 btn btn-info d-flex align-items-center justify-content-center">
+                                            <img class="img-fluid m-1"
+                                                src="{{ URL::asset('build/img/icons/facebook-logo.svg') }}" alt="Facebook">
+                                        </a>
+                                    </div>
+                                    <div class="text-center me-2 flex-fill">
+                                        <a href="javascript:void(0);"
+                                            class="btn btn-white br-10 p-2  border d-flex align-items-center justify-content-center">
+                                            <img class="img-fluid m-1"
+                                                src="{{ URL::asset('build/img/icons/google-logo.svg') }}" alt="Facebook">
+                                        </a>
+                                    </div>
+                                    <div class="text-center flex-fill">
+                                        <a href="javascript:void(0);"
+                                            class="bg-dark br-10 p-2 btn btn-dark d-flex align-items-center justify-content-center">
+                                            <img class="img-fluid m-1"
+                                                src="{{ URL::asset('build/img/icons/apple-logo.svg') }}" alt="Apple">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div> --}}
+                            <div class="my-4 d-flex justify-content-center align-items-center copyright-text">
+                                <p>Copyright &copy; {{ date('Y') }} Marcommms</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6 p-0">
+                <div class="login-img">
+                    <img src="{{ URL::asset('build/img/authentication/authentication-01.svg') }}" alt="img">
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
