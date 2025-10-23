@@ -1,8 +1,42 @@
+# stages: [deploy]
+
+# deploy_ftp:
+#   stage: deploy
+#   image: alpine:3.20
+#   variables:
+#     # Set to "true" for a preview first run (no changes), then switch to "false"s
+#     DRY_RUN: "false"
+#   before_script:
+#     - apk add --no-cache lftp
+#   script: |
+#     lftp -u "$FTP_USER","$FTP_PASS" ftp://$FTP_HOST:$FTP_PORT -e "
+#       set ftp:passive-mode yes;
+#       set net:max-retries 2;
+#       set net:timeout 30;
+
+#       # Reverse-mirror local -> server.
+#       # --delete removes files from server that don't exist locally.
+#       mirror -R ${DRY_RUN:+--dry-run} --parallel=3 --delete \
+#         --exclude-glob .git* \
+#         --exclude-glob .github/* \
+#         --exclude-glob .gitlab-ci.yml \
+#         --exclude-glob node_modules/* \
+#         --exclude-glob tests/* \
+#         --exclude-glob .env \
+#         --exclude-glob storage/** \
+#         --exclude-glob uploads/** \
+#         ./ ${REMOTE_DIR};
+#       bye"
+#   only:
+#     - main
 stages: [deploy]
 
 deploy_ftp:
   stage: deploy
   image: alpine:3.20
+  variables:
+    # Set to "true" for a preview first run (no changes), then switch to "false"s
+    DRY_RUN: "false"
   before_script:
     - apk add --no-cache lftp
   script: |
