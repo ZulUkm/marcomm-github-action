@@ -20,8 +20,8 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
-          protocol: ftps
-          server-dir: ${{ secrets.FTP_REMOTE_DIR }}/  # Add trailing slash
+          protocol: ftp  # Changed from ftps to ftp
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
           state-name: .ftp-deploy-sync-state.json
           log-level: verbose
           exclude: |
