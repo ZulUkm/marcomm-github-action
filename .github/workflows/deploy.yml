@@ -1,0 +1,38 @@
+name: 🚀 Deploy via FTP
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180   # allow long first uploads
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to FTP server
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          protocol: ftps                   # fallback to ftp if FTPS not supported
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          state-name: .ftp-deploy-sync-state.json
+          log-level: verbose
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/.gitlab-ci.yml
+            **/node_modules/**
+            **/tests/**
+            **/.env
+            storage/**
+            uploads/**
+            **/*.map
+            **/*.zip
+            **/*.psd
