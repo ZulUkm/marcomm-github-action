@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: alpine:3.20
+    runs-on: windows-latest
     timeout-minutes: 180   # allow long first uploads
     steps:
       - name: Checkout code
