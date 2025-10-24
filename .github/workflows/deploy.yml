@@ -20,7 +20,8 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
-          protocol: ftp  # Changed from ftps to ftp
+          protocol: ftp
+          passive: true  # Enable passive mode
           server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
           state-name: .ftp-deploy-sync-state.json
           log-level: verbose
